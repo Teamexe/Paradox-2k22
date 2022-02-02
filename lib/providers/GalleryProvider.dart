@@ -16,7 +16,7 @@ class GalleryProvider extends ChangeNotifier {
 
     String url = "$baseUrl$route";
 
-    Response response = await get(url);
+    Response response = await get(Uri.parse(url));
     try {
       if (response.statusCode == 200) {
         _images.clear();

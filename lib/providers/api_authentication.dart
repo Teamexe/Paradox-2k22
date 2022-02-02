@@ -11,7 +11,7 @@ class ApiAuthentication {
   Future<bool> userIsPresent() async {
     try {
       final String getUrl = baseUrl + "user-present-or-not/" + uid;
-      Response getResponse = await get(getUrl);
+      Response getResponse = await get(Uri.parse (getUrl));
 
       if (getResponse.statusCode == 404) {
         return false;
@@ -33,7 +33,7 @@ class ApiAuthentication {
 
       // posting user's data
       Response postResponse = await post(
-        postUrl,
+        Uri.parse(postUrl),
         body: jsonEncode(<String, String>{
           'google_id': uid,
           'name': firebaseUser.displayName,

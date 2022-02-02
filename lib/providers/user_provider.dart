@@ -25,7 +25,7 @@ class UserProvider extends ChangeNotifier {
 
     /// Sending Request to backend with [google_id], [name], [email] to create new User.
     Response postResponse = await post(
-      postUrl,
+      Uri.parse(postUrl),
       body: jsonEncode(<String, String>{
         'google_id': uid,
         'name': displayName,
@@ -53,7 +53,7 @@ class UserProvider extends ChangeNotifier {
       return;
     }
     String url = "${baseUrl}userProfile/${user.uid}/";
-    Response response = await get(url);
+    Response response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
       var userProfile = jsonDecode(response.body);
       this.user.referralCode = userProfile['ref_code'];
@@ -75,7 +75,7 @@ class UserProvider extends ChangeNotifier {
   Future<bool> userIsPresent() async {
     try {
       final String getUrl = "${baseUrl}user-present-or-not/${user.uid}";
-      Response getResponse = await get(getUrl);
+      Response getResponse = await get(Uri.parse(getUrl));
       if (getResponse.statusCode == 404) {
         return false;
       } else if (getResponse.statusCode == 200) {
@@ -97,7 +97,7 @@ class UserProvider extends ChangeNotifier {
         await googleSignInAccount.authentication;
 
     // ignore: deprecated_member_use
-    final AuthCredential credential = GoogleAuthProvider.getCredential(
+    final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
       idToken: googleSignInAuthentication.idToken,
     );
@@ -140,7 +140,7 @@ class UserProvider extends ChangeNotifier {
   Future<dynamic> availHints() async {
     String url = "${baseUrl}avail-hints/";
     try {
-      Response response = await post(url,
+      Response response = await post(Uri.parse(url),
           body: jsonEncode(<String, dynamic>{
             'google_id': FirebaseAuth.instance.currentUser.uid,
             'level': this.user.level,
@@ -171,7 +171,7 @@ class UserProvider extends ChangeNotifier {
 
   Future<dynamic> updateUserImage() async {
     try {
-      Response response = await post("${baseUrl}update-photo/",
+      Response response = await post(Uri.parse("${baseUrl}update-photo/"),
           body: jsonEncode(<String, dynamic>{
             "google_id": FirebaseAuth.instance.currentUser.uid,
             "image": FirebaseAuth.instance.currentUser.photoURL

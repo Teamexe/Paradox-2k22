@@ -34,7 +34,7 @@ class QuestionProvider extends ChangeNotifier {
 
   Future<void> fetchQuestions() async {
     String url = "${baseUrl}questions/";
-    Response response = await get(url);
+    Response response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
       _questionList.clear();
       clearList();
@@ -68,7 +68,7 @@ class QuestionProvider extends ChangeNotifier {
     if (loadedHints == false) {
 
       String url = "${baseUrl}hints/";
-      Response response = await get(url);
+      Response response = await get(Uri.parse(url));
       if (response.statusCode == 200) {
         _hintsList.clear();
         var data = jsonDecode(response.body);
@@ -92,7 +92,7 @@ class QuestionProvider extends ChangeNotifier {
     String url = "${baseUrl}check-answer/";
     try {
       Response response = await post(
-        url,
+        Uri.parse(url),
         body: jsonEncode(<String, dynamic>{
           'answer': answer.toLowerCase(),
           'google_id': uid,
