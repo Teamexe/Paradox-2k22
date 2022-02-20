@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             home: StreamBuilder(
-              stream: FirebaseAuth.instance.onAuthStateChanged,
+              stream: FirebaseAuth.instance.authStateChanges(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   Provider.of<ThemeProvider>(context, listen: true).brightness;

@@ -8,7 +8,7 @@ class ReferralProvider extends ChangeNotifier {
   Future<bool> availReferral(String code, String userId) async {
     String url = '${baseUrl}refferral/';
     Response response =
-        await post(url, body: {"ref_code": code, "user": userId});
+        await post(Uri.parse(url), body: {"ref_code": code, "user": userId});
     final body = jsonDecode(response.body);
     if (response.statusCode == 200) {
       createToast(body['message']);

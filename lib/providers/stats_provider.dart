@@ -13,7 +13,7 @@ class StatsProvider extends ChangeNotifier {
   Future<void> fetchAndSetStats() async {
     String url = '${baseUrl}stats/';
     try {
-      Response response = await get(url);
+      Response response = await get(Uri.parse(url));
       if (response.statusCode == 200) {
         final body = jsonDecode(response.body);
         this.attempts = body['attempts'];

@@ -19,7 +19,7 @@ class LeaderBoardProvider extends ChangeNotifier {
     String url = "$baseUrl$route";
 
     /// Placing Request on Backend
-    Response response = await get(url);
+    Response response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
       /// Clearing [_userList]
       _userList.clear();

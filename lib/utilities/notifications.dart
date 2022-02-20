@@ -18,8 +18,7 @@ Future showNotification(String title, String subtitle) async {
   var initializationSettingsAndroid =
       new AndroidInitializationSettings('launcher_icons');
   var initializationSettingsIOS = new IOSInitializationSettings();
-  var initializationSettings = new InitializationSettings(
-      initializationSettingsAndroid, initializationSettingsIOS);
+  var initializationSettings = new InitializationSettings( );
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
   flutterLocalNotificationsPlugin.initialize(initializationSettings,
@@ -28,17 +27,15 @@ Future showNotification(String title, String subtitle) async {
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
     'your channel id',
     'Temple Shots',
-    'your channel description',
-    importance: Importance.Max,
-    priority: Priority.High,
+    importance: Importance.max,
+    priority: Priority.high,
     color: Colors.blue,
     enableLights: true,
     largeIcon: DrawableResourceAndroidBitmap('launcher_icons'),
     styleInformation: MediaStyleInformation(),
   );
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-  var platformChannelSpecifics = new NotificationDetails(
-      androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  var platformChannelSpecifics = new NotificationDetails( );
   Future.delayed(
       Duration(seconds: 60),
       () async => {

@@ -35,7 +35,7 @@ class ExeMembersProvider extends ChangeNotifier {
     String url = "${baseUrl}exe-members/";
 
     /// Placing request to [url] to retrieve List of Exe Members
-    Response response = await get(url);
+    Response response = await get(Uri.parse(url));
 
     if (response.statusCode == 200) {
       try {
