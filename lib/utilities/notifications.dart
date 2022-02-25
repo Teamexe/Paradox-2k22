@@ -28,7 +28,6 @@ Future showNotification(String title, String subtitle) async {
   var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
     'your channel id',
     'Temple Shots',
-    // 'your channel description',
     importance: Importance.max,
     priority: Priority.high,
     color: Colors.blue,

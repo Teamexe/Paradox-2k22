@@ -12,7 +12,6 @@ class ApiAuthentication {
     try {
       final String getUrl = baseUrl + "user-present-or-not/" + uid;
       Response getResponse = await get(Uri.parse(getUrl));
-      print(getResponse.body);
       if (getResponse.statusCode == 404) {
         return false;
       } else if (getResponse.statusCode == 200) {
