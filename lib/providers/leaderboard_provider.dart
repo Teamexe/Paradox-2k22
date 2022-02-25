@@ -19,7 +19,7 @@ class LeaderBoardProvider extends ChangeNotifier {
     String url = "$baseUrl$route";
 
     /// Placing Request on Backend
-    Response response = await get(url);
+    Response response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
       /// Clearing [_userList]
       _userList.clear();
@@ -54,10 +54,10 @@ class LeaderBoardProvider extends ChangeNotifier {
   }
 
   int getRank(String id) {
-     for(int i = 0;i<userList.length;i++){
-       if(userList[i].user == id){
-         return i+1;
-       }
-     }
+    for(int i = 0;i<userList.length;i++){
+      if(userList[i].user == id){
+        return i+1;
+      }
+    }
   }
 }

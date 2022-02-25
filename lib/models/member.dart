@@ -12,10 +12,10 @@ class ExeMemberProfile {
 
   ExeMemberProfile(
       {@required this.id,
-      @required this.name,
-      @required this.position,
-      @required this.category,
-      @required this.image,
-      @required this.githubUrl,
-      @required this.linkedInUrl});
+        @required this.name,
+        @required this.position,
+        @required this.category,
+        @required this.image,
+        @required this.githubUrl,
+        @required this.linkedInUrl});
 }

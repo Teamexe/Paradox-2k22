@@ -9,9 +9,9 @@ class Hint {
 
   Hint(
       {
-      @required this.level,
-      @required this.hint1,
-      @required this.hint2,
-      @required this.hint3,
+        @required this.level,
+        @required this.hint1,
+        @required this.hint2,
+        @required this.hint3,
       });
 }

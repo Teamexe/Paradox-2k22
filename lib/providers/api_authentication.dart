@@ -11,16 +11,17 @@ class ApiAuthentication {
   Future<bool> userIsPresent() async {
     try {
       final String getUrl = baseUrl + "user-present-or-not/" + uid;
-      Response getResponse = await get(getUrl);
-
+      Response getResponse = await get(Uri.parse(getUrl));
+      print(getResponse.body);
       if (getResponse.statusCode == 404) {
         return false;
       } else if (getResponse.statusCode == 200) {
         return true;
       }
+      print(getResponse.statusCode.toString());
       return false;
     } catch (e) {
-
+      print(e);
       throw Exception();
     }
   }
@@ -29,11 +30,11 @@ class ApiAuthentication {
   Future createUser() async {
     try {
       final String postUrl = baseUrl + "user/";
-
+      print(postUrl);
 
       // posting user's data
       Response postResponse = await post(
-        postUrl,
+        Uri.parse(postUrl),
         body: jsonEncode(<String, String>{
           'google_id': uid,
           'name': firebaseUser.displayName,
@@ -45,13 +46,13 @@ class ApiAuthentication {
       );
 
       if (postResponse.statusCode == 201) {
-
+        print('user created');
       } else if (postResponse.statusCode == 400) {
-
+        print('some error');
       }
-
+      print(postResponse.body);
     } catch (e) {
-
+      print(e);
       throw Exception();
     }
   }
