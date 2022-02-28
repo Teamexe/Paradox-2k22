@@ -54,10 +54,10 @@ class LeaderBoardProvider extends ChangeNotifier {
   }
 
   int getRank(String id) {
-     for(int i = 0;i<userList.length;i++){
-       if(userList[i].user == id){
-         return i+1;
-       }
-     }
+    for(int i = 0;i<userList.length;i++){
+      if(userList[i].user == id){
+        return i+1;
+      }
+    }
   }
 }

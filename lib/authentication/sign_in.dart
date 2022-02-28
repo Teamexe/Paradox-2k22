@@ -1,17 +1,15 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hover_effect/hover_effect.dart';
-import 'package:paradox/models/brightness_options.dart';
-import 'package:paradox/providers/theme_provider.dart';
+import 'package:paradox/providers/leaderboard_provider.dart';
+import 'package:paradox/providers/question_provider.dart';
 import 'package:paradox/providers/user_provider.dart';
 import 'package:paradox/screens/home_screen.dart';
 import 'package:paradox/utilities/Toast.dart';
 import 'package:paradox/utilities/clipper.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-import 'package:paradox/widgets/no_data_connection.dart';
 import 'package:provider/provider.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class SignIn extends StatelessWidget {
   static String routeName = '/sign_in';
@@ -65,219 +63,204 @@ class _SignInWidgetState extends State<SignInWidget>
 
   @override
   Widget build(BuildContext context) {
-    final brightness = Provider.of<ThemeProvider>(context).brightnessOption;
-
     // to start the animation
     animationController.forward();
 
     return LoaderOverlay(
       child: SafeArea(
-        child: Stack(
-          children: [
-            AbsorbPointer(
-              absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
-              child: Opacity(
-                opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
-                child: Container(
-                  padding: null,
-                  margin: null,
-                  width: double.infinity,
-                  height: double.infinity,
-                  color: brightness == BrightnessOption.light
-                      ? Colors.blue.shade400
-                      : Colors.black.withOpacity(.9),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          FadeTransition(
-                            opacity: fadeAnimation,
-                            child: Container(
-                              height: 195,
-                              padding: null,
-                              margin: null,
-                              child: ClipPath(
-                                clipper: CustomizedClipper(),
-                                child: Container(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          FadeTransition(
-                            opacity: fadeAnimation,
-                            child: Container(
-                              height: 165,
-                              padding: null,
-                              margin: null,
-                              child: ClipPath(
-                                clipper: CustomizedClipper(),
-                                child: Container(
-                                  color: brightness == BrightnessOption.light
-                                      ? Colors.blue
-                                      : Colors.black.withOpacity(1),
-                                ),
-                              ),
-                            ),
-                          ),
-                          FadeTransition(
-                            opacity: fadeAnimation,
-                            child: Container(
-                              height: 150,
-                              padding: null,
-                              margin: null,
-                              child: ClipPath(
-                                clipper: CustomizedClipper(),
-                                child: Container(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          FadeTransition(
-                            opacity: fadeAnimation,
-                            child: Container(
-                              height: 140,
-                              padding: null,
-                              margin: null,
-                              child: ClipPath(
-                                clipper: CustomizedClipper(),
-                                child: Container(
-                                  color: brightness == BrightnessOption.light
-                                      ? Colors.blue[900].withAlpha(1000)
-                                      : Colors.black.withOpacity(1),
-                                ),
-                              ),
-                            ),
-                          ),
-                          FadeTransition(
-                            opacity: fadeAnimation,
-                            child: Container(
-                              height: 135,
-                              padding: null,
-                              margin: null,
-                              child: ClipPath(
-                                clipper: CustomizedClipper(),
-                                child: Container(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Expanded(
-                        // width: 260,
-                        // height: 80,
-                        child: ScaleTransition(
-                          scale: scaleAnimation,
-                          child: Text(
-                            'Paradox',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 70,
-                              fontWeight: FontWeight.bold,
-                              shadows: <Shadow>[
-                                Shadow(
-                                    offset: Offset(3.0, 3.0),
-                                    blurRadius: 5,
-                                    color: Colors.black),
-                              ],
-                            ),
-                          ),
+        child: Container(
+          padding: null,
+          margin: null,
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.blue.shade400,
+          // decoration: BoxDecoration(
+          //   gradient: LinearGradient(
+          //     begin: Alignment.topLeft,
+          //     end: Alignment.bottomRight,
+          //     colors: [Colors.red, Colors.yellow, Colors.blue, Colors.purple]
+          //   ),
+          // ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                children: [
+                  FadeTransition(
+                    opacity: fadeAnimation,
+                    child: Container(
+                      height: 195,
+                      padding: null,
+                      margin: null,
+                      child: ClipPath(
+                        clipper: CustomizedClipper(),
+                        child: Container(
+                          color: Colors.white,
                         ),
                       ),
-                      SizedBox(height: 15),
-                      SizedBox(
-                        width: 200,
-                        height: 60,
-                        child: HoverCard(
-                          builder: (context, hovering) {
-                            return FadeTransition(
-                              opacity: fadeAnimation,
-                              child: Container(
-                                color: Colors.white,
-                                alignment: Alignment.center,
-                                child: RichText(
-                                  text: TextSpan(
-                                      style: TextStyle(
-                                          fontSize: 32,
-                                          color: Colors.lightBlue[900].withAlpha(1000),
-                                          fontWeight: FontWeight.bold),
-                                      children: [
-                                        TextSpan(text: 'Team .E'),
-                                        TextSpan(
-                                            text: 'X',
-                                            style: TextStyle(
-                                                fontSize: 32,
-                                                color: Colors.lightBlue,
-                                                fontWeight: FontWeight.bold)),
-                                        TextSpan(text: 'E'),
-                                      ]),
-                                ),
-                              ),
-                            );
-                          },
-                          depth: 10,
-                          depthColor: Colors.blue,
-                          shadow: BoxShadow(
-                              color: Colors.transparent,
-                              blurRadius: 20,
-                              spreadRadius: 0,
-                              offset: Offset(0.0, 0.75)),
+                    ),
+                  ),
+                  FadeTransition(
+                    opacity: fadeAnimation,
+                    child: Container(
+                      height: 165,
+                      padding: null,
+                      margin: null,
+                      child: ClipPath(
+                        clipper: CustomizedClipper(),
+                        child: Container(
+                          color: Colors.blue,
                         ),
                       ),
-                      SizedBox(height: 100),
-                      Container(
-                        padding: EdgeInsets.all(30),
-                        child: FadeTransition(
-                          opacity: fadeAnimation,
-                          child: Container(
-                            child: MaterialButton(
-                              child: isSigningIn
-                                  ? SpinKitCircle(color: Colors.blue)
-                                  : GoogleSignInButton(),
-                              color: Colors.white,
-                              highlightColor: Colors.white,
-                              splashColor: Colors.white,
-                              onPressed: () {
-                                setState(() {
-                                  isSigningIn = true;
-                                });
-                                UserProvider()
-                                    .signInWithGoogle()
-                                    .whenComplete(() async {
-                                  if (FirebaseAuth.instance.currentUser != null) {
-                                    createToast('Sign in Successful');
-                                    Navigator.of(context).pushNamed(Home.routeName);
-                                  } else {
-                                    createToast('Sign In Unsuccessful');
-                                  }
-                                  setState(() {
-                                    isSigningIn = false;
-                                  });
-                                });
-                              },
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                          ),
+                    ),
+                  ),
+                  FadeTransition(
+                    opacity: fadeAnimation,
+                    child: Container(
+                      height: 150,
+                      padding: null,
+                      margin: null,
+                      child: ClipPath(
+                        clipper: CustomizedClipper(),
+                        child: Container(
+                          color: Colors.white,
                         ),
                       ),
-                      Spacer()
-                    ],
+                    ),
+                  ),
+                  FadeTransition(
+                    opacity: fadeAnimation,
+                    child: Container(
+                      height: 140,
+                      padding: null,
+                      margin: null,
+                      child: ClipPath(
+                        clipper: CustomizedClipper(),
+                        child: Container(
+                          color: Colors.blue[900].withAlpha(1000),
+                        ),
+                      ),
+                    ),
+                  ),
+                  FadeTransition(
+                    opacity: fadeAnimation,
+                    child: Container(
+                      height: 135,
+                      padding: null,
+                      margin: null,
+                      child: ClipPath(
+                        clipper: CustomizedClipper(),
+                        child: Container(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+              Expanded(
+                // width: 260,
+                // height: 80,
+                child: ScaleTransition(
+                  scale: scaleAnimation,
+                  child: Text(
+                    'Paradox',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 70,
+                      fontWeight: FontWeight.bold,
+                      shadows: <Shadow>[
+                        Shadow(
+                            offset: Offset(3.0, 3.0),
+                            blurRadius: 5,
+                            color: Colors.black),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Visibility(
-              visible: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected,
-              child: NoDataConnectionWidget(),
-            ),
-          ],
+              SizedBox(height: 15),
+              SizedBox(
+                width: 200,
+                height: 60,
+                child: HoverCard(
+                  builder: (context, hovering) {
+                    return FadeTransition(
+                      opacity: fadeAnimation,
+                      child: Container(
+                        color: Colors.white,
+                        alignment: Alignment.center,
+                        child: RichText(
+                          text: TextSpan(
+                              style: TextStyle(
+                                  fontSize: 32,
+                                  color: Colors.lightBlue[900].withAlpha(1000),
+                                  fontWeight: FontWeight.bold),
+                              children: [
+                                TextSpan(text: 'Team .E'),
+                                TextSpan(
+                                    text: 'X',
+                                    style: TextStyle(
+                                        fontSize: 32,
+                                        color: Colors.lightBlue,
+                                        fontWeight: FontWeight.bold)),
+                                TextSpan(text: 'E'),
+                              ]),
+                        ),
+                      ),
+                    );
+                  },
+                  depth: 10,
+                  depthColor: Colors.blue,
+                  shadow: BoxShadow(
+                      color: Colors.transparent,
+                      blurRadius: 20,
+                      spreadRadius: 0,
+                      offset: Offset(0.0, 0.75)),
+                ),
+              ),
+              SizedBox(height: 100),
+              Container(
+                padding: EdgeInsets.all(30),
+                child: FadeTransition(
+                  opacity: fadeAnimation,
+                  child: Container(
+                    child: MaterialButton(
+                      child: isSigningIn
+                          ? SpinKitCircle(color: Colors.blue)
+                          : GoogleSignInButton(),
+                      color: Colors.white,
+                      highlightColor: Colors.white,
+                      splashColor: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          isSigningIn = true;
+                        });
+                        UserProvider()
+                            .signInWithGoogle()
+                            .whenComplete(() async {
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            createToast('Sign in Successful');
+                            Navigator.of(context).pushNamed(Home.routeName);
+                          } else {
+                            createToast('Sign In Unsuccessful');
+                          }
+                          setState(() {
+                            isSigningIn = false;
+                          });
+                        });
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Spacer()
+            ],
+          ),
         ),
       ),
     );

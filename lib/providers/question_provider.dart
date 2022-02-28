@@ -64,7 +64,7 @@ class QuestionProvider extends ChangeNotifier {
 
 
 
- Future<void> fetchHints() async {
+  Future<void> fetchHints() async {
     if (loadedHints == false) {
 
       String url = "${baseUrl}hints/";
@@ -84,17 +84,24 @@ class QuestionProvider extends ChangeNotifier {
       } else {
         throw Exception();
       }
-    loadedHints = true;
-    return;
-  }}
+      loadedHints = true;
+      return;
+    }}
 
   Future<dynamic> checkAnswer(String answer, int level, String uid) async {
     String url = "${baseUrl}check-answer/";
+    print(
+      jsonEncode(<String, dynamic>{
+        'answer': answer,
+        'google_id': uid,
+        'level': level
+      }),
+    );
     try {
       Response response = await post(
         Uri.parse(url),
         body: jsonEncode(<String, dynamic>{
-          'answer': answer.toLowerCase(),
+          'answer': answer,
           'google_id': uid,
           'level': level
         }),
@@ -110,7 +117,7 @@ class QuestionProvider extends ChangeNotifier {
         return null;
       }
     } catch (err) {
-
+      print(err);
       return null;
     }
 

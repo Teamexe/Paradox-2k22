@@ -18,7 +18,8 @@ Future showNotification(String title, String subtitle) async {
   var initializationSettingsAndroid =
       new AndroidInitializationSettings('launcher_icons');
   var initializationSettingsIOS = new IOSInitializationSettings();
-  var initializationSettings = new InitializationSettings( );
+  var initializationSettings = new InitializationSettings(
+      android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       new FlutterLocalNotificationsPlugin();
   flutterLocalNotificationsPlugin.initialize(initializationSettings,
@@ -35,7 +36,8 @@ Future showNotification(String title, String subtitle) async {
     styleInformation: MediaStyleInformation(),
   );
   var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-  var platformChannelSpecifics = new NotificationDetails( );
+  var platformChannelSpecifics = new NotificationDetails(
+      android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
   Future.delayed(
       Duration(seconds: 60),
       () async => {

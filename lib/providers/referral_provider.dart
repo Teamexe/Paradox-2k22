@@ -6,9 +6,9 @@ import 'package:paradox/utilities/constant.dart';
 
 class ReferralProvider extends ChangeNotifier {
   Future<bool> availReferral(String code, String userId) async {
-    String url = '${baseUrl}refferral/';
+    String url = '${baseUrl}referral/';
     Response response =
-        await post(Uri.parse(url), body: {"ref_code": code, "user": userId});
+    await post(Uri.parse(url), body: {"ref_code": code, "user": userId});
     final body = jsonDecode(response.body);
     if (response.statusCode == 200) {
       createToast(body['message']);
