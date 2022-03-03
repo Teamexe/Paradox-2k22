@@ -376,9 +376,18 @@ class _HomePageState extends State<HomePage>
                         ),
                         SizedBox(height: 8),
                         Container(
+                          padding: new EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+
+                            color: const Color(0xff2196f3),
+
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                           child: Text('Use referral code',
+
                               style: TextStyle(
-                                  color: Colors.blue.withOpacity(0.8),
+
+                                  color: Colors.white.withOpacity(0.8),
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400)),
                         ),
@@ -387,7 +396,7 @@ class _HomePageState extends State<HomePage>
                           scale: scaleAnimation,
                           child: Container(
                             // margin: EdgeInsets.symmetric(horizontal: 10),
-                            color: Colors.blue.withOpacity(0.84),
+                            // color: Colors.blue.withOpacity(0.84),
                             height: 40,
                             alignment: Alignment.center,
                             child: Container(
@@ -396,15 +405,31 @@ class _HomePageState extends State<HomePage>
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
+                                      padding: new EdgeInsets.all(10.0),
+                                      decoration: BoxDecoration(
+
+                                        color: const Color(0xff2196f3),
+
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
                                       margin: EdgeInsets.only(left: 10),
                                       child: Text(
                                           'Your referral code is: ${user.referralCode}',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white, fontSize: 16))),
-                                  FlatButton(
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
+                                  ElevatedButton(
+                                    // splashColor: Colors.transparent,
+                                    // highlightColor: Colors.transparent,
+                                    style: ButtonStyle(
+                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(18.0),
+                                                side: BorderSide(color: Colors.lightBlue)
+                                            )
+                                        )
+
+                                    ),
                                     onPressed: () {
                                       Share.share(
                                           'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralCode} and earn 50 coins.');
