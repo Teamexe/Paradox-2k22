@@ -52,13 +52,16 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
           title: Text(
             'Paradox',
             style: TextStyle(
-              letterSpacing: 2,
-              fontWeight: FontWeight.w300,
+              letterSpacing: 3,
+              fontWeight: FontWeight.w700,
             ),
           ),
           actions: [
             AbsorbPointer(
-              absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
+              absorbing: Provider.of<DataConnectionStatus>(context) ==
+                      DataConnectionStatus.disconnected
+                  ? true
+                  : false,
               child: GestureDetector(
                 onTap: load
                     ? null
@@ -68,7 +71,10 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                 child: Container(
                   padding: EdgeInsets.all(10),
                   child: Opacity(
-                    opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
+                    opacity: Provider.of<DataConnectionStatus>(context) ==
+                            DataConnectionStatus.disconnected
+                        ? 0.2
+                        : 1,
                     child: Container(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(40),
@@ -90,8 +96,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
                 ),
               )
             : AppDrawer(),
-        body:  _buildBody()
-    );
+        body: _buildBody());
   }
 
   @override
@@ -108,11 +113,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     Future.delayed(Duration.zero, () async {
       try {
         await ApiAuthentication().userIsPresent().then((value) async => {
-          if (value)
-            {print('user already in database')}
-          else
-            {await ApiAuthentication().createUser()}
-        });
+              if (value)
+                {print('user already in database')}
+              else
+                {await ApiAuthentication().createUser()}
+            });
         Provider.of<UserProvider>(context, listen: false).assignUser(
             FirebaseAuth.instance.currentUser.uid,
             FirebaseAuth.instance.currentUser.email,
@@ -140,15 +145,13 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     if (load != true) {
       loadUserImage;
       return HomePage();
-    }
-    else if (Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected)
-      return NoDataConnectionWidget();
+    } else if (Provider.of<DataConnectionStatus>(context) ==
+        DataConnectionStatus.disconnected) return NoDataConnectionWidget();
     loadUserImage;
     return Center(
-        child: SpinKitFoldingCube(
-          color: Colors.blue,
-        )
-    );
+        child: SpinKitSquareCircle(
+      color: Colors.amber,
+    ));
   }
 
   get loadUserImage {
@@ -219,9 +222,15 @@ class _HomePageState extends State<HomePage>
         child: Stack(
           children: [
             Opacity(
-              opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
+              opacity: Provider.of<DataConnectionStatus>(context) ==
+                      DataConnectionStatus.disconnected
+                  ? 0.2
+                  : 1,
               child: AbsorbPointer(
-                absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
+                absorbing: Provider.of<DataConnectionStatus>(context) ==
+                        DataConnectionStatus.disconnected
+                    ? true
+                    : false,
                 child: SingleChildScrollView(
                   child: Container(
                     padding: null,
@@ -234,25 +243,29 @@ class _HomePageState extends State<HomePage>
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                       width: 180,
                                       height: 50,
-                                      margin: EdgeInsets.only(left: 10, top: 10),
+                                      margin:
+                                          EdgeInsets.only(left: 10, top: 10),
                                       child: TypeWriterBox('Paradox')),
                                   GestureDetector(
                                     child: Container(
                                       height: 45,
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.all(5),
-                                      margin: EdgeInsets.only(top: 10, right: 10),
+                                      margin:
+                                          EdgeInsets.only(top: 10, right: 10),
                                       child: ScaleTransition(
                                         scale: scaleAnimation,
                                         child: Text('View Rules',
                                             style: TextStyle(
                                                 fontSize: 18,
-                                                color: Colors.blue.withOpacity(0.85))),
+                                                color: Colors.blue
+                                                    .withOpacity(0.85))),
                                       ),
                                     ),
                                     onTap: () {
@@ -282,9 +295,11 @@ class _HomePageState extends State<HomePage>
                                           });
                                         }),
                                     items: itemList.map((paradoxCard) {
-                                      return Builder(builder: (BuildContext context) {
+                                      return Builder(
+                                          builder: (BuildContext context) {
                                         return Container(
-                                          width: MediaQuery.of(context).size.width,
+                                          width:
+                                              MediaQuery.of(context).size.width,
                                           child: Transform.scale(
                                             scale: 1,
                                             child: paradoxCard,
@@ -306,7 +321,7 @@ class _HomePageState extends State<HomePage>
                                       margin: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 2),
                                       decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
+                                        shape: BoxShape.rectangle,
                                         color: _currentIndex == index
                                             ? Colors.blue.withOpacity(0.7)
                                             : Colors.grey.withOpacity(0.55),
@@ -319,12 +334,14 @@ class _HomePageState extends State<HomePage>
                               ScaleTransition(
                                 scale: scaleAnimation,
                                 child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 16),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 16),
                                     child: Divider()),
                               ),
                               SizedBox(height: 15),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
@@ -345,7 +362,8 @@ class _HomePageState extends State<HomePage>
                                       child: Text('nimbus'.toUpperCase(),
                                           style: TextStyle(
                                               fontSize: 18,
-                                              color: Colors.blue.withOpacity(0.85))),
+                                              color: Colors.blue
+                                                  .withOpacity(0.85))),
                                     ),
                                   ),
                                 ],
@@ -359,7 +377,8 @@ class _HomePageState extends State<HomePage>
                                     : ListView.builder(
                                         scrollDirection: Axis.horizontal,
                                         itemBuilder: (ctx, index) {
-                                          return PlayerCard(users[index], index + 1);
+                                          return PlayerCard(
+                                              users[index], index + 1);
                                         },
                                         itemCount: users.length,
                                       ),
@@ -393,7 +412,8 @@ class _HomePageState extends State<HomePage>
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
                                       margin: EdgeInsets.only(left: 10),
@@ -401,7 +421,8 @@ class _HomePageState extends State<HomePage>
                                           'Your referral code is: ${user.referralCode}',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              color: Colors.white, fontSize: 16))),
+                                              color: Colors.white,
+                                              fontSize: 16))),
                                   FlatButton(
                                     splashColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
@@ -431,7 +452,8 @@ class _HomePageState extends State<HomePage>
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, MemberScreen.routeName);
+                                  Navigator.pushNamed(
+                                      context, MemberScreen.routeName);
                                 },
                                 child: Text('Members',
                                     style: TextStyle(
@@ -444,7 +466,8 @@ class _HomePageState extends State<HomePage>
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, InfoScreen.routeName);
+                                  Navigator.pushNamed(
+                                      context, InfoScreen.routeName);
                                 },
                                 child: Text('Information',
                                     style: TextStyle(
@@ -477,12 +500,14 @@ class _HomePageState extends State<HomePage>
                                     TextSpan(text: 'Made with '),
                                     TextSpan(
                                         text: String.fromCharCode(0x2665),
-                                        style: TextStyle(fontFamily: 'Material Icons')),
+                                        style: TextStyle(
+                                            fontFamily: 'Material Icons')),
                                     TextSpan(text: ' by '),
                                     TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
-                                          if (await canLaunch('https://teamexe.in')) {
+                                          if (await canLaunch(
+                                              'https://teamexe.in')) {
                                             launch('https://teamexe.in');
                                           } else {
                                             throw 'Could not launch https://teamexe.in';
@@ -491,14 +516,16 @@ class _HomePageState extends State<HomePage>
                                       text: 'Team .E',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: Colors.lightBlue[900].withAlpha(1000),
+                                        color: Colors.lightBlue[900]
+                                            .withAlpha(1000),
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
-                                          if (await canLaunch('https://teamexe.in')) {
+                                          if (await canLaunch(
+                                              'https://teamexe.in')) {
                                             launch('https://teamexe.in');
                                           } else {
                                             throw 'Could not launch https://teamexe.in';
@@ -514,7 +541,8 @@ class _HomePageState extends State<HomePage>
                                     TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
-                                          if (await canLaunch('https://teamexe.in')) {
+                                          if (await canLaunch(
+                                              'https://teamexe.in')) {
                                             launch('https://teamexe.in');
                                           } else {
                                             throw 'Could not launch https://teamexe.in';
@@ -523,7 +551,8 @@ class _HomePageState extends State<HomePage>
                                       text: 'E',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: Colors.lightBlue[900].withAlpha(1000),
+                                        color: Colors.lightBlue[900]
+                                            .withAlpha(1000),
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -538,8 +567,9 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Visibility(
-                visible: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected,
-                child: NoDataConnectionWidget(),
+              visible: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected,
+              child: NoDataConnectionWidget(),
             ),
           ],
         ),
@@ -570,7 +600,8 @@ class _HomePageState extends State<HomePage>
 class ParadoxPlayEasy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final brightness = Provider.of<ThemeProvider>(context, listen: true).brightnessOption;
+    final brightness =
+        Provider.of<ThemeProvider>(context, listen: true).brightnessOption;
     final easyList = Provider.of<QuestionProvider>(context).easyList;
     final level = Provider.of<UserProvider>(context).user.level;
     return GestureDetector(
