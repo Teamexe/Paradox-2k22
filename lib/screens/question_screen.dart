@@ -34,20 +34,31 @@ class _QuestionScreenState extends State<QuestionScreen> {
     if (loading == false || loadingHints == false || loadedUser == false) {
       return Center(
           child: Container(
-            child: Text("Loading"),
+        child: Text("Loading"),
       ));
     }
     return Scaffold(
-      key: globalKey,
+      resizeToAvoidBottomInset: false,
+      // key: globalKey,
       appBar: AppBar(
-        backgroundColor: brightness == BrightnessOption.light ? Color(0xff0083B0) : Colors.grey[900] ,
+        backgroundColor: brightness == BrightnessOption.light
+            ? Color(0xff0083B0)
+            : Colors.grey[900],
         leading: AbsorbPointer(
-          absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
+          absorbing: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected
+              ? true
+              : false,
           child: Opacity(
-            opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
-            child: IconButton(icon: Icon(Icons.arrow_back_ios), onPressed: (){
-              Navigator.pop(context);
-            }),
+            opacity: Provider.of<DataConnectionStatus>(context) ==
+                    DataConnectionStatus.disconnected
+                ? 0.2
+                : 1,
+            child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
           ),
         ),
         actions: [
@@ -63,54 +74,72 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ],
         elevation: 0,
       ),
-      body: Stack(
-        children: [
-          AbsorbPointer(
-            absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
-            child: Opacity(
-              opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
-              child: ScrollConfiguration(
-                behavior: MyBehavior(),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 1,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      brightness == BrightnessOption.light ? Color(0xff0083B0) : Colors.grey[900],
-                      brightness == BrightnessOption.light ? Color(0xff00B4DB) : Colors.grey[900],
-                      // Color(0xff1A2980),
-                    ], begin: Alignment.topCenter, end: Alignment.bottomRight),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff0083B0),
-                        blurRadius: 12,
-                        offset: Offset(0, 6),
-                      ),
-                    ],
-                  ),
-                  child: questList.isEmpty
-                      ? SpinKitCircle(
-                    color: Colors.white,
-                  )
-                      : QuestionDisplay(
-                    questList: questList,
-                    level: level,
+      body: SingleChildScrollView(
+        child: Stack(
+          children: [
+            AbsorbPointer(
+              absorbing: Provider.of<DataConnectionStatus>(context) ==
+                      DataConnectionStatus.disconnected
+                  ? true
+                  : false,
+              child: Opacity(
+                opacity: Provider.of<DataConnectionStatus>(context) ==
+                        DataConnectionStatus.disconnected
+                    ? 0.2
+                    : 1,
+                child: ScrollConfiguration(
+                  behavior: MyBehavior(),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 1,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: [
+                        brightness == BrightnessOption.light
+                            ? Color(0xff0083B0)
+                            : Colors.grey[900],
+                        brightness == BrightnessOption.light
+                            ? Color(0xff00B4DB)
+                            : Colors.grey[900],
+                        // Color(0xff1A2980),
+                      ], begin: Alignment.topCenter, end: Alignment.bottomRight),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff0083B0),
+                          blurRadius: 12,
+                          offset: Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: questList.isEmpty
+                        ? SpinKitCircle(
+                            color: Colors.white,
+                          )
+                        : QuestionDisplay(
+                            questList: questList,
+                            level: level,
+                          ),
                   ),
                 ),
               ),
             ),
-          ),
-          Visibility(
-            visible: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected,
-            child: NoDataConnectionWidget(),
-          ),
-        ],
+            Visibility(
+              visible: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected,
+              child: NoDataConnectionWidget(),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: AbsorbPointer(
-        absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true :false,
+        absorbing: Provider.of<DataConnectionStatus>(context) ==
+                DataConnectionStatus.disconnected
+            ? true
+            : false,
         child: Opacity(
-          opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
-          child: HintsFab()
-        ),
+            opacity: Provider.of<DataConnectionStatus>(context) ==
+                    DataConnectionStatus.disconnected
+                ? 0.2
+                : 1,
+            child: HintsFab()),
       ),
     );
   }
