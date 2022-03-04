@@ -520,7 +520,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                                 if (hintNumber >= 3)
                                   Container(
                                     width: double.infinity,
-                                    child: FlatButton(
+                                    child: TextButton(
                                       child: Text(
                                           '${hintList[user.level - 1].hint3}',
                                           textAlign: TextAlign.center),
@@ -534,7 +534,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                               if (user.hintLevel <= 0)
                                 Container(
                                   width: double.infinity,
-                                  child: FlatButton(
+                                  child: TextButton(
                                     onPressed: () async {
                                       if (user.hintLevel != 0) {
                                         createToast(
@@ -555,7 +555,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                               if (user.hintLevel >= 1)
                                 Container(
                                   width: double.infinity,
-                                  child: FlatButton(
+                                  child: TextButton(
                                     child: Text(
                                         '${hintList[user.level - 1].hint1}',
                                         textAlign: TextAlign.center),
@@ -565,7 +565,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                               if (user.hintLevel <= 1)
                                 Container(
                                   width: double.infinity,
-                                  child: FlatButton(
+                                  child: TextButton(
                                     onPressed: () {
                                       if (user.hintLevel != 1) {
                                         createToast(
@@ -587,7 +587,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                               if (user.hintLevel >= 2)
                                 Container(
                                   width: double.infinity,
-                                  child: FlatButton(
+                                  child: TextButton(
                                     child: Text(
                                         '${hintList[user.level - 1].hint2}',
                                         textAlign: TextAlign.center),
@@ -597,7 +597,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                               if (user.hintLevel <= 2)
                                 Container(
                                   width: double.infinity,
-                                  child: FlatButton(
+                                  child: TextButton(
                                     onPressed: () {
                                       if (user.hintLevel != 2) {
                                         createToast(
@@ -619,7 +619,7 @@ class _QuestionPageLayoutState extends State<QuestionPageLayout> {
                               if (user.hintLevel >= 3)
                                 Container(
                                   width: double.infinity,
-                                  child: FlatButton(
+                                  child: TextButton(
                                     child: Text(
                                         '${hintList[user.level - 1].hint3}',
                                         textAlign: TextAlign.center),

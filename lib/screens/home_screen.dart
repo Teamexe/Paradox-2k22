@@ -47,28 +47,34 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        // resizeToAvoidBottomPadding: false,
+      // resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text(
             'Paradox',
             style: TextStyle(
-              letterSpacing: 2,
-              fontWeight: FontWeight.w300,
+              letterSpacing: 3,
+              fontWeight: FontWeight.w700,
             ),
           ),
           actions: [
             AbsorbPointer(
-              absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
+              absorbing: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected
+                  ? true
+                  : false,
               child: GestureDetector(
                 onTap: load
                     ? null
                     : () {
-                        Navigator.pushNamed(context, ProfileScreen.routeName);
-                      },
+                  Navigator.pushNamed(context, ProfileScreen.routeName);
+                },
                 child: Container(
                   padding: EdgeInsets.all(10),
                   child: Opacity(
-                    opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
+                    opacity: Provider.of<DataConnectionStatus>(context) ==
+                        DataConnectionStatus.disconnected
+                        ? 0.2
+                        : 1,
                     child: Container(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(40),
@@ -85,13 +91,12 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
         ),
         drawer: load
             ? Drawer(
-                child: Center(
-                  child: SpinKitDualRing(color: Colors.blue),
-                ),
-              )
+          child: Center(
+            child: SpinKitDualRing(color: Colors.blue),
+          ),
+        )
             : AppDrawer(),
-        body:  _buildBody()
-    );
+        body: _buildBody());
   }
 
   @override
@@ -140,15 +145,13 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     if (load != true) {
       loadUserImage;
       return HomePage();
-    }
-    else if (Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected)
-      return NoDataConnectionWidget();
+    } else if (Provider.of<DataConnectionStatus>(context) ==
+        DataConnectionStatus.disconnected) return NoDataConnectionWidget();
     loadUserImage;
     return Center(
         child: SpinKitFoldingCube(
           color: Colors.blue,
-        )
-    );
+        ));
   }
 
   get loadUserImage {
@@ -219,9 +222,15 @@ class _HomePageState extends State<HomePage>
         child: Stack(
           children: [
             Opacity(
-              opacity: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? 0.2 : 1,
+              opacity: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected
+                  ? 0.2
+                  : 1,
               child: AbsorbPointer(
-                absorbing: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected ? true : false,
+                absorbing: Provider.of<DataConnectionStatus>(context) ==
+                    DataConnectionStatus.disconnected
+                    ? true
+                    : false,
                 child: SingleChildScrollView(
                   child: Container(
                     padding: null,
@@ -234,25 +243,29 @@ class _HomePageState extends State<HomePage>
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                       width: 180,
                                       height: 50,
-                                      margin: EdgeInsets.only(left: 10, top: 10),
+                                      margin:
+                                      EdgeInsets.only(left: 10, top: 10),
                                       child: TypeWriterBox('Paradox')),
                                   GestureDetector(
                                     child: Container(
                                       height: 45,
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.all(5),
-                                      margin: EdgeInsets.only(top: 10, right: 10),
+                                      margin:
+                                      EdgeInsets.only(top: 10, right: 10),
                                       child: ScaleTransition(
                                         scale: scaleAnimation,
                                         child: Text('View Rules',
                                             style: TextStyle(
                                                 fontSize: 18,
-                                                color: Colors.blue.withOpacity(0.85))),
+                                                color: Colors.blue
+                                                    .withOpacity(0.85))),
                                       ),
                                     ),
                                     onTap: () {
@@ -272,7 +285,7 @@ class _HomePageState extends State<HomePage>
                                         autoPlay: true,
                                         autoPlayInterval: Duration(seconds: 3),
                                         autoPlayAnimationDuration:
-                                            Duration(milliseconds: 800),
+                                        Duration(milliseconds: 800),
                                         autoPlayCurve: Curves.fastOutSlowIn,
                                         pauseAutoPlayOnTouch: true,
                                         aspectRatio: 2.0,
@@ -282,15 +295,17 @@ class _HomePageState extends State<HomePage>
                                           });
                                         }),
                                     items: itemList.map((paradoxCard) {
-                                      return Builder(builder: (BuildContext context) {
-                                        return Container(
-                                          width: MediaQuery.of(context).size.width,
-                                          child: Transform.scale(
-                                            scale: 1,
-                                            child: paradoxCard,
-                                          ),
-                                        );
-                                      });
+                                      return Builder(
+                                          builder: (BuildContext context) {
+                                            return Container(
+                                              width:
+                                              MediaQuery.of(context).size.width,
+                                              child: Transform.scale(
+                                                scale: 1,
+                                                child: paradoxCard,
+                                              ),
+                                            );
+                                          });
                                     }).toList(),
                                   ),
                                 ),
@@ -306,7 +321,7 @@ class _HomePageState extends State<HomePage>
                                       margin: EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 2),
                                       decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
+                                        shape: BoxShape.rectangle,
                                         color: _currentIndex == index
                                             ? Colors.blue.withOpacity(0.7)
                                             : Colors.grey.withOpacity(0.55),
@@ -319,12 +334,14 @@ class _HomePageState extends State<HomePage>
                               ScaleTransition(
                                 scale: scaleAnimation,
                                 child: Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 16),
+                                    margin:
+                                    EdgeInsets.symmetric(horizontal: 16),
                                     child: Divider()),
                               ),
                               SizedBox(height: 15),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
@@ -345,7 +362,8 @@ class _HomePageState extends State<HomePage>
                                       child: Text('nimbus'.toUpperCase(),
                                           style: TextStyle(
                                               fontSize: 18,
-                                              color: Colors.blue.withOpacity(0.85))),
+                                              color: Colors.blue
+                                                  .withOpacity(0.85))),
                                     ),
                                   ),
                                 ],
@@ -357,12 +375,13 @@ class _HomePageState extends State<HomePage>
                                 child: users.length == 0
                                     ? SpinKitDualRing(color: Colors.blue)
                                     : ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (ctx, index) {
-                                          return PlayerCard(users[index], index + 1);
-                                        },
-                                        itemCount: users.length,
-                                      ),
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (ctx, index) {
+                                    return PlayerCard(
+                                        users[index], index + 1);
+                                  },
+                                  itemCount: users.length,
+                                ),
                               ),
                             ],
                           ),
@@ -376,18 +395,14 @@ class _HomePageState extends State<HomePage>
                         ),
                         SizedBox(height: 8),
                         Container(
-                          // padding: new EdgeInsets.all(10.0),
-                          // decoration: BoxDecoration(
-                          //
-                          //   color: const Color(0xff2196f3),
-                          //
-                          //   borderRadius: BorderRadius.circular(12),
-                          // ),
+                          padding: new EdgeInsets.all(10.0),
+                          decoration: BoxDecoration(
+                            color: const Color(0xff2196f3),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
                           child: Text('Use referral code',
-
                               style: TextStyle(
-
-                                  color: Colors.blue.withOpacity(0.8),
+                                  color: Colors.white.withOpacity(0.8),
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400)),
                         ),
@@ -402,14 +417,13 @@ class _HomePageState extends State<HomePage>
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
                                       padding: new EdgeInsets.all(10.0),
                                       decoration: BoxDecoration(
-
                                         color: const Color(0xff2196f3),
-
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       margin: EdgeInsets.only(left: 10),
@@ -417,30 +431,8 @@ class _HomePageState extends State<HomePage>
                                           'Your referral code is: ${user.referralCode}',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              color: Colors.white, fontSize: 16))),
-                                  // ElevatedButton(
-                                  //   // splashColor: Colors.transparent,
-                                  //   // highlightColor: Colors.transparent,
-                                  //   style: ButtonStyle(
-                                  //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  //           RoundedRectangleBorder(
-                                  //               borderRadius: BorderRadius.circular(18.0),
-                                  //               side: BorderSide(color: Colors.lightBlue)
-                                  //           )
-                                  //       )
-                                  //
-                                  //   ),
-                                  //   onPressed: () {
-                                  //     Share.share(
-                                  //         'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralCode} and earn 50 coins.');
-                                  //   },
-                                  //   child: Text('Share'.toUpperCase(),
-                                  //       textAlign: TextAlign.center,
-                                  //       style: TextStyle(
-                                  //           color: Colors.white,
-                                  //           fontWeight: FontWeight.w400,
-                                  //           fontSize: 16)),
-                                  // ),
+                                              color: Colors.white,
+                                              fontSize: 16))),
                                   CircleAvatar(
                                     backgroundColor: Colors.blue,
                                     radius: 20,
@@ -454,7 +446,8 @@ class _HomePageState extends State<HomePage>
                                           onPressed: () {
                                             Share.share(
                                                 'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralAvailed} and earn 50 coins.');
-                                          }),
+                                          }
+                                          ),
                                     ),
                                   ),
                                 ],
@@ -472,7 +465,8 @@ class _HomePageState extends State<HomePage>
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, MemberScreen.routeName);
+                                  Navigator.pushNamed(
+                                      context, MemberScreen.routeName);
                                 },
                                 child: Text('Members',
                                     style: TextStyle(
@@ -485,7 +479,8 @@ class _HomePageState extends State<HomePage>
                                 splashColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onPressed: () {
-                                  Navigator.pushNamed(context, InfoScreen.routeName);
+                                  Navigator.pushNamed(
+                                      context, InfoScreen.routeName);
                                 },
                                 child: Text('Information',
                                     style: TextStyle(
@@ -518,12 +513,14 @@ class _HomePageState extends State<HomePage>
                                     TextSpan(text: 'Made with '),
                                     TextSpan(
                                         text: String.fromCharCode(0x2665),
-                                        style: TextStyle(fontFamily: 'Material Icons')),
+                                        style: TextStyle(
+                                            fontFamily: 'Material Icons')),
                                     TextSpan(text: ' by '),
                                     TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
-                                          if (await canLaunch('https://teamexe.in')) {
+                                          if (await canLaunch(
+                                              'https://teamexe.in')) {
                                             launch('https://teamexe.in');
                                           } else {
                                             throw 'Could not launch https://teamexe.in';
@@ -532,14 +529,16 @@ class _HomePageState extends State<HomePage>
                                       text: 'Team .E',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: Colors.lightBlue[900].withAlpha(1000),
+                                        color: Colors.lightBlue[900]
+                                            .withAlpha(1000),
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
-                                          if (await canLaunch('https://teamexe.in')) {
+                                          if (await canLaunch(
+                                              'https://teamexe.in')) {
                                             launch('https://teamexe.in');
                                           } else {
                                             throw 'Could not launch https://teamexe.in';
@@ -555,7 +554,8 @@ class _HomePageState extends State<HomePage>
                                     TextSpan(
                                       recognizer: TapGestureRecognizer()
                                         ..onTap = () async {
-                                          if (await canLaunch('https://teamexe.in')) {
+                                          if (await canLaunch(
+                                              'https://teamexe.in')) {
                                             launch('https://teamexe.in');
                                           } else {
                                             throw 'Could not launch https://teamexe.in';
@@ -564,7 +564,8 @@ class _HomePageState extends State<HomePage>
                                       text: 'E',
                                       style: TextStyle(
                                         fontSize: 20,
-                                        color: Colors.lightBlue[900].withAlpha(1000),
+                                        color: Colors.lightBlue[900]
+                                            .withAlpha(1000),
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -579,8 +580,9 @@ class _HomePageState extends State<HomePage>
               ),
             ),
             Visibility(
-                visible: Provider.of<DataConnectionStatus>(context) == DataConnectionStatus.disconnected,
-                child: NoDataConnectionWidget(),
+              visible: Provider.of<DataConnectionStatus>(context) ==
+                  DataConnectionStatus.disconnected,
+              child: NoDataConnectionWidget(),
             ),
           ],
         ),
@@ -589,15 +591,15 @@ class _HomePageState extends State<HomePage>
           return ShaderMask(
             shaderCallback: (rect) {
               return RadialGradient(
-                      colors: [
-                        Colors.white,
-                        Colors.white,
-                        Colors.transparent,
-                        Colors.transparent
-                      ],
-                      radius: value * 5,
-                      stops: [0.0, .55, .66, 1.0],
-                      center: FractionalOffset(.1, .6))
+                  colors: [
+                    Colors.white,
+                    Colors.white,
+                    Colors.transparent,
+                    Colors.transparent
+                  ],
+                  radius: value * 5,
+                  stops: [0.0, .55, .66, 1.0],
+                  center: FractionalOffset(.1, .6))
                   .createShader(rect);
             },
             child: child,
@@ -611,7 +613,8 @@ class _HomePageState extends State<HomePage>
 class ParadoxPlayEasy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final brightness = Provider.of<ThemeProvider>(context, listen: true).brightnessOption;
+    final brightness =
+        Provider.of<ThemeProvider>(context, listen: true).brightnessOption;
     final easyList = Provider.of<QuestionProvider>(context).easyList;
     final level = Provider.of<UserProvider>(context).user.level;
     return GestureDetector(
