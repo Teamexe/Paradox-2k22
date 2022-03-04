@@ -25,11 +25,11 @@ dependencies:
     sdk: flutter
 
   hover_effect: ^0.6.0
-  google_sign_in: ^5.2.3
-  firebase_auth: ^3.3.7
+  google_sign_in: ^5.2.4
+  firebase_auth: ^3.3.9
   show_overlay: ^1.0.8
   flutter_spinkit: ^5.1.0
-  fluttertoast: ^8.0.8
+  fluttertoast: ^8.0.9
   provider: ^6.0.2
   http: ^0.13.4
   photo_view: ^0.13.0
@@ -53,7 +53,7 @@ dependencies:
   data_connection_checker: ^0.3.4
   system_shortcuts: ^1.0.0
   app_settings: ^4.1.0
-
+  flutter_custom_cards: ^0.2.1
 
 
 
@@ -98,6 +98,7 @@ flutter:
     - assets/images/referral_availed.gif
     - assets/images/referral.gif
     - assets/images/internet.jpg
+    - assets/images/sharing.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

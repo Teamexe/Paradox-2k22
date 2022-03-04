@@ -136,7 +136,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
   }
 
   Widget _buildBody() {
-    loadData();
+    // loadData();
     if (load != true) {
       loadUserImage;
       return HomePage();
@@ -376,18 +376,18 @@ class _HomePageState extends State<HomePage>
                         ),
                         SizedBox(height: 8),
                         Container(
-                          padding: new EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-
-                            color: const Color(0xff2196f3),
-
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                          // padding: new EdgeInsets.all(10.0),
+                          // decoration: BoxDecoration(
+                          //
+                          //   color: const Color(0xff2196f3),
+                          //
+                          //   borderRadius: BorderRadius.circular(12),
+                          // ),
                           child: Text('Use referral code',
 
                               style: TextStyle(
 
-                                  color: Colors.white.withOpacity(0.8),
+                                  color: Colors.blue.withOpacity(0.8),
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400)),
                         ),
@@ -418,28 +418,44 @@ class _HomePageState extends State<HomePage>
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.white, fontSize: 16))),
-                                  ElevatedButton(
-                                    // splashColor: Colors.transparent,
-                                    // highlightColor: Colors.transparent,
-                                    style: ButtonStyle(
-                                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(18.0),
-                                                side: BorderSide(color: Colors.lightBlue)
-                                            )
-                                        )
-
+                                  // ElevatedButton(
+                                  //   // splashColor: Colors.transparent,
+                                  //   // highlightColor: Colors.transparent,
+                                  //   style: ButtonStyle(
+                                  //       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  //           RoundedRectangleBorder(
+                                  //               borderRadius: BorderRadius.circular(18.0),
+                                  //               side: BorderSide(color: Colors.lightBlue)
+                                  //           )
+                                  //       )
+                                  //
+                                  //   ),
+                                  //   onPressed: () {
+                                  //     Share.share(
+                                  //         'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralCode} and earn 50 coins.');
+                                  //   },
+                                  //   child: Text('Share'.toUpperCase(),
+                                  //       textAlign: TextAlign.center,
+                                  //       style: TextStyle(
+                                  //           color: Colors.white,
+                                  //           fontWeight: FontWeight.w400,
+                                  //           fontSize: 16)),
+                                  // ),
+                                  CircleAvatar(
+                                    backgroundColor: Colors.blue,
+                                    radius: 20,
+                                    child: FittedBox(
+                                      child: IconButton(
+                                          icon: Icon(
+                                            Icons.share,
+                                            size: 27,
+                                          ),
+                                          color: Colors.white,
+                                          onPressed: () {
+                                            Share.share(
+                                                'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralAvailed} and earn 50 coins.');
+                                          }),
                                     ),
-                                    onPressed: () {
-                                      Share.share(
-                                          'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralCode} and earn 50 coins.');
-                                    },
-                                    child: Text('Share'.toUpperCase(),
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 16)),
                                   ),
                                 ],
                               ),
