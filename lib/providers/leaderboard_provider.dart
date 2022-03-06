@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
-import 'package:paradox/models/leaderBoardUser.dart';
+import 'package:paradox/models/LeaderBoardUser.dart';
 import 'package:paradox/utilities/constant.dart';
 
 class LeaderBoardProvider extends ChangeNotifier {
