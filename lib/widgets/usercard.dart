@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:paradox/models/brightness_options.dart';
-import 'package:paradox/models/leaderBoardUser.dart';
 import 'package:paradox/providers/theme_provider.dart';
 import 'package:paradox/screens/photo_view.dart';
 import 'package:provider/provider.dart';
+import 'package:paradox/models/LeaderBoardUser.dart';
 
 class UserCardWidget extends StatelessWidget {
   final LeaderBoardUser user;

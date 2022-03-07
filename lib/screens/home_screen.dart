@@ -2,13 +2,11 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:paradox/models/LeaderBoardUser.dart';
 import 'package:paradox/models/brightness_options.dart';
-import 'package:paradox/models/leaderBoardUser.dart';
 import 'package:paradox/models/user.dart' as BaseUser;
 import 'package:paradox/providers/api_authentication.dart';
 import 'package:paradox/providers/leaderboard_provider.dart';
@@ -22,6 +20,7 @@ import 'package:paradox/screens/stageCompleted_screen.dart';
 import 'package:paradox/screens/user_profile_screen.dart';
 import 'package:paradox/utilities/Toast.dart';
 import 'package:paradox/screens/member_screen.dart';
+import 'package:paradox/utilities/colors.dart';
 import 'package:paradox/widgets/no_data_connection.dart';
 import 'package:paradox/utilities/notifications.dart';
 import 'package:paradox/utilities/type_writer_box.dart';
@@ -47,7 +46,7 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      // resizeToAvoidBottomPadding: false,
+        // resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text(
             'Paradox',
@@ -59,20 +58,20 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
           actions: [
             AbsorbPointer(
               absorbing: Provider.of<DataConnectionStatus>(context) ==
-                  DataConnectionStatus.disconnected
+                      DataConnectionStatus.disconnected
                   ? true
                   : false,
               child: GestureDetector(
                 onTap: load
                     ? null
                     : () {
-                  Navigator.pushNamed(context, ProfileScreen.routeName);
-                },
+                        Navigator.pushNamed(context, ProfileScreen.routeName);
+                      },
                 child: Container(
                   padding: EdgeInsets.all(10),
                   child: Opacity(
                     opacity: Provider.of<DataConnectionStatus>(context) ==
-                        DataConnectionStatus.disconnected
+                            DataConnectionStatus.disconnected
                         ? 0.2
                         : 1,
                     child: Container(
@@ -91,10 +90,10 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
         ),
         drawer: load
             ? Drawer(
-          child: Center(
-            child: SpinKitDualRing(color: Colors.blue),
-          ),
-        )
+                child: Center(
+                  child: SpinKitDualRing(color: Colors.blue),
+                ),
+              )
             : AppDrawer(),
         body: _buildBody());
   }
@@ -113,11 +112,11 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     Future.delayed(Duration.zero, () async {
       try {
         await ApiAuthentication().userIsPresent().then((value) async => {
-          if (value)
-            {print('user already in database')}
-          else
-            {await ApiAuthentication().createUser()}
-        });
+              if (value)
+                {print('user already in database')}
+              else
+                {await ApiAuthentication().createUser()}
+            });
         Provider.of<UserProvider>(context, listen: false).assignUser(
             FirebaseAuth.instance.currentUser.uid,
             FirebaseAuth.instance.currentUser.email,
@@ -150,8 +149,8 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin<Home> {
     loadUserImage;
     return Center(
         child: SpinKitFoldingCube(
-          color: Colors.blue,
-        ));
+      color: Colors.blue,
+    ));
   }
 
   get loadUserImage {
@@ -223,12 +222,12 @@ class _HomePageState extends State<HomePage>
           children: [
             Opacity(
               opacity: Provider.of<DataConnectionStatus>(context) ==
-                  DataConnectionStatus.disconnected
+                      DataConnectionStatus.disconnected
                   ? 0.2
                   : 1,
               child: AbsorbPointer(
                 absorbing: Provider.of<DataConnectionStatus>(context) ==
-                    DataConnectionStatus.disconnected
+                        DataConnectionStatus.disconnected
                     ? true
                     : false,
                 child: SingleChildScrollView(
@@ -244,13 +243,13 @@ class _HomePageState extends State<HomePage>
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                       width: 180,
                                       height: 50,
                                       margin:
-                                      EdgeInsets.only(left: 10, top: 10),
+                                          EdgeInsets.only(left: 10, top: 10),
                                       child: TypeWriterBox('Paradox')),
                                   GestureDetector(
                                     child: Container(
@@ -258,7 +257,7 @@ class _HomePageState extends State<HomePage>
                                       alignment: Alignment.center,
                                       padding: EdgeInsets.all(5),
                                       margin:
-                                      EdgeInsets.only(top: 10, right: 10),
+                                          EdgeInsets.only(top: 10, right: 10),
                                       child: ScaleTransition(
                                         scale: scaleAnimation,
                                         child: Text('View Rules',
@@ -285,7 +284,7 @@ class _HomePageState extends State<HomePage>
                                         autoPlay: true,
                                         autoPlayInterval: Duration(seconds: 3),
                                         autoPlayAnimationDuration:
-                                        Duration(milliseconds: 800),
+                                            Duration(milliseconds: 800),
                                         autoPlayCurve: Curves.fastOutSlowIn,
                                         pauseAutoPlayOnTouch: true,
                                         aspectRatio: 2.0,
@@ -297,15 +296,15 @@ class _HomePageState extends State<HomePage>
                                     items: itemList.map((paradoxCard) {
                                       return Builder(
                                           builder: (BuildContext context) {
-                                            return Container(
-                                              width:
+                                        return Container(
+                                          width:
                                               MediaQuery.of(context).size.width,
-                                              child: Transform.scale(
-                                                scale: 1,
-                                                child: paradoxCard,
-                                              ),
-                                            );
-                                          });
+                                          child: Transform.scale(
+                                            scale: 1,
+                                            child: paradoxCard,
+                                          ),
+                                        );
+                                      });
                                     }).toList(),
                                   ),
                                 ),
@@ -323,8 +322,9 @@ class _HomePageState extends State<HomePage>
                                       decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
                                         color: _currentIndex == index
-                                            ? Colors.blue.withOpacity(0.7)
-                                            : Colors.grey.withOpacity(0.55),
+                                            ? primaryColor.withOpacity(0.7)
+                                            : primaryDarkColor
+                                                .withOpacity(0.55),
                                       ),
                                     );
                                   }),
@@ -335,13 +335,13 @@ class _HomePageState extends State<HomePage>
                                 scale: scaleAnimation,
                                 child: Container(
                                     margin:
-                                    EdgeInsets.symmetric(horizontal: 16),
+                                        EdgeInsets.symmetric(horizontal: 16),
                                     child: Divider()),
                               ),
                               SizedBox(height: 15),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Align(
                                     alignment: Alignment.topLeft,
@@ -362,7 +362,7 @@ class _HomePageState extends State<HomePage>
                                       child: Text('nimbus'.toUpperCase(),
                                           style: TextStyle(
                                               fontSize: 18,
-                                              color: Colors.blue
+                                              color: primaryColor
                                                   .withOpacity(0.85))),
                                     ),
                                   ),
@@ -373,15 +373,15 @@ class _HomePageState extends State<HomePage>
                                 height: 250,
                                 margin: EdgeInsets.symmetric(horizontal: 10),
                                 child: users.length == 0
-                                    ? SpinKitDualRing(color: Colors.blue)
+                                    ? SpinKitDualRing(color: primaryColor)
                                     : ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (ctx, index) {
-                                    return PlayerCard(
-                                        users[index], index + 1);
-                                  },
-                                  itemCount: users.length,
-                                ),
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (ctx, index) {
+                                          return PlayerCard(
+                                              users[index], index + 1);
+                                        },
+                                        itemCount: users.length,
+                                      ),
                               ),
                             ],
                           ),
@@ -397,7 +397,7 @@ class _HomePageState extends State<HomePage>
                         Container(
                           padding: new EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: const Color(0xff2196f3),
+                            color: primaryColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text('Use referral code',
@@ -418,12 +418,12 @@ class _HomePageState extends State<HomePage>
                               margin: EdgeInsets.symmetric(horizontal: 10),
                               child: Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
                                       padding: new EdgeInsets.all(10.0),
                                       decoration: BoxDecoration(
-                                        color: const Color(0xff2196f3),
+                                        color: primaryColor,
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       margin: EdgeInsets.only(left: 10),
@@ -434,7 +434,7 @@ class _HomePageState extends State<HomePage>
                                               color: Colors.white,
                                               fontSize: 16))),
                                   CircleAvatar(
-                                    backgroundColor: Colors.blue,
+                                    backgroundColor: primaryColor,
                                     radius: 20,
                                     child: FittedBox(
                                       child: IconButton(
@@ -446,8 +446,7 @@ class _HomePageState extends State<HomePage>
                                           onPressed: () {
                                             Share.share(
                                                 'Download Paradox from https://play.google.com/store/apps/details?id=com.exe.paradoxplay and use my referral code: ${user.referralAvailed} and earn 50 coins.');
-                                          }
-                                          ),
+                                          }),
                                     ),
                                   ),
                                 ],
@@ -473,7 +472,7 @@ class _HomePageState extends State<HomePage>
                                         fontSize: 17,
                                         letterSpacing: 2,
                                         fontWeight: FontWeight.w400,
-                                        color: Colors.blue.withOpacity(0.85))),
+                                        color: primaryColor.withOpacity(0.85))),
                               ),
                               FlatButton(
                                 splashColor: Colors.transparent,
@@ -487,7 +486,7 @@ class _HomePageState extends State<HomePage>
                                         fontSize: 17,
                                         letterSpacing: 2,
                                         fontWeight: FontWeight.w400,
-                                        color: Colors.blue.withOpacity(0.85))),
+                                        color: primaryColor.withOpacity(0.85))),
                               ),
                               Spacer(),
                             ],
@@ -591,15 +590,15 @@ class _HomePageState extends State<HomePage>
           return ShaderMask(
             shaderCallback: (rect) {
               return RadialGradient(
-                  colors: [
-                    Colors.white,
-                    Colors.white,
-                    Colors.transparent,
-                    Colors.transparent
-                  ],
-                  radius: value * 5,
-                  stops: [0.0, .55, .66, 1.0],
-                  center: FractionalOffset(.1, .6))
+                      colors: [
+                        Colors.white,
+                        Colors.white,
+                        Colors.transparent,
+                        Colors.transparent
+                      ],
+                      radius: value * 5,
+                      stops: [0.0, .55, .66, 1.0],
+                      center: FractionalOffset(.1, .6))
                   .createShader(rect);
             },
             child: child,
@@ -624,15 +623,15 @@ class ParadoxPlayEasy extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           color: brightness == BrightnessOption.light
-              ? Colors.blue.withOpacity(.85)
-              : Colors.grey,
+              ? primaryColor.withOpacity(.85)
+              : secondaryDarkColor,
           child: Card(
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
             color: brightness == BrightnessOption.light
-                ? Colors.lightBlue.shade100
+                ? secondaryColor
                 : Colors.black,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -647,7 +646,7 @@ class ParadoxPlayEasy extends StatelessWidget {
                 Spacer(),
                 if (brightness == BrightnessOption.dark)
                   Divider(
-                    color: Colors.grey,
+                    color: secondaryDarkColor,
                   ),
                 Container(
                   decoration: BoxDecoration(
@@ -738,15 +737,15 @@ class ParadoxPlayMedium extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           color: brightness == BrightnessOption.light
-              ? Colors.blue.withOpacity(0.85)
-              : Colors.grey,
+              ? primaryColor.withOpacity(0.85)
+              : secondaryDarkColor,
           child: Card(
             elevation: 0,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
             color: brightness == BrightnessOption.light
-                ? Colors.lightBlue.shade100
+                ? secondaryColor
                 : Colors.black,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -782,12 +781,12 @@ class ParadoxPlayMedium extends StatelessWidget {
                 Spacer(),
                 if (brightness == BrightnessOption.dark)
                   Divider(
-                    color: Colors.grey,
+                    color: secondaryDarkColor,
                   ),
                 Container(
                   decoration: BoxDecoration(
                     color: brightness == BrightnessOption.light
-                        ? Colors.blue.withOpacity(0.85)
+                        ? primaryColor.withOpacity(0.85)
                         : Colors.black,
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
@@ -879,7 +878,7 @@ class ParadoxPlayHard extends StatelessWidget {
         width: double.infinity,
         child: Card(
           color: brightness == BrightnessOption.light
-              ? Colors.blue.withOpacity(0.85)
+              ? primaryColor.withOpacity(0.85)
               : Colors.grey,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -890,7 +889,7 @@ class ParadoxPlayHard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             color: brightness == BrightnessOption.light
-                ? Colors.lightBlue.shade100
+                ? secondaryColor
                 : Colors.black,
             child: Column(
               children: [
@@ -937,7 +936,7 @@ class ParadoxPlayHard extends StatelessWidget {
                 Spacer(),
                 if (brightness == BrightnessOption.dark)
                   Divider(
-                    color: Colors.grey,
+                    color: secondaryDarkColor,
                   ),
                 Container(
                   decoration: BoxDecoration(
