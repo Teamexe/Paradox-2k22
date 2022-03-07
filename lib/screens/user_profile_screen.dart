@@ -6,6 +6,7 @@ import 'package:paradox/providers/theme_provider.dart';
 import 'package:paradox/providers/user_provider.dart';
 import 'package:paradox/screens/Referral.dart';
 import 'package:paradox/widgets/customCard.dart';
+// import 'package:flutter_custom_cards/flutter_custom_card.dart';
 import 'package:paradox/widgets/custom_card_dark_theme.dart';
 import 'package:provider/provider.dart';
 
@@ -168,11 +169,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           SizedBox(height: 10),
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            padding: const EdgeInsets.symmetric(horizontal: 120),
                             child: Container(
-                              padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                              // padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                               width: double.infinity,
                               child: MaterialButton(
+
                                   onPressed: () {
                                     Navigator.of(context)
                                         .pushNamed(ReferralScreen.routeName);
@@ -180,7 +182,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 48,
                                   color: Colors.blue,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Text(
                                       'Referral',
                                       style: TextStyle(
@@ -189,12 +191,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
+
                                   shape: RoundedRectangleBorder(
                                     side: BorderSide(
                                         color: brightness == BrightnessOption.light ? Colors.grey[100] : Colors.white,
                                         width: brightness == BrightnessOption.light ? 2 : 3,
                                         style: BorderStyle.solid),
-                                    borderRadius: BorderRadius.circular(10.0),
+                                    borderRadius: BorderRadius.circular(18.0),
                                   )
                               ),
                             ),
